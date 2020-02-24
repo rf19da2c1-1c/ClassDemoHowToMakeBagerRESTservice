@@ -12,7 +12,7 @@ namespace BagerREST.DBUtil
         /*
          * Skal kunne minst fem metoder
          *
-         * Hente alle, Hente en spific, slette, opdatere, indsætte
+         * Hente alle, Hente en specifik, slette, opdatere, indsætte
          *
          */
 
@@ -65,6 +65,34 @@ namespace BagerREST.DBUtil
 
             return kage;
         }
+
+        private const string INSERT_SQL = "insert into Kage (Name, Price, NoOfPieces) values(@Name, @Price, @Pieces)";
+
+        public bool Opret(Kage kage)
+        {
+            bool ok = false;
+ 
+            // forbindelse til database
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                // sql kald
+                using (SqlCommand cmd = new SqlCommand(INSERT_SQL, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", kage.Name);
+                    cmd.Parameters.AddWithValue("@Price", kage.Price);
+                    cmd.Parameters.AddWithValue("@Pieces", kage.NoOfPieces);
+
+                    int rows = cmd.ExecuteNonQuery();
+
+                    ok = rows == 1;
+                }
+            }
+
+            return ok;
+        }
+
+
 
         private Kage ReadNextKage(SqlDataReader reader)
         {
