@@ -34,13 +34,17 @@ namespace BagerREST.Controllers
         }
 
         // PUT: api/Kager/5
-        public void Put(string key, [FromBody]Kage value)
+        [Route("{key}")]
+        public bool Put(string key, [FromBody]Kage value)
         {
+            return mgr.Update(key, value);
         }
 
         // DELETE: api/Kager/5
-        public void Delete(string key)
+        [Route("{key}")]
+        public Kage Delete(string key)
         {
+            return mgr.Delete(key);
         }
     }
 }

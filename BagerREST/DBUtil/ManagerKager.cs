@@ -19,6 +19,8 @@ namespace BagerREST.DBUtil
         private const String connString =
             @"Data Source=(localdb)\ProjectsV13;Initial Catalog=ClassDemo;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
+
+        private const string GET_ALL_SQL = "select * from Kage";
         public IList<Kage> HentAlle()
         {
             IList<Kage> retListe = new List<Kage>();
@@ -28,7 +30,7 @@ namespace BagerREST.DBUtil
             {
                 conn.Open();
                 // sql kald
-                using (SqlCommand cmd = new SqlCommand("select * from Kage", conn))
+                using (SqlCommand cmd = new SqlCommand(GET_ALL_SQL, conn))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -83,13 +85,75 @@ namespace BagerREST.DBUtil
                     cmd.Parameters.AddWithValue("@Price", kage.Price);
                     cmd.Parameters.AddWithValue("@Pieces", kage.NoOfPieces);
 
-                    int rows = cmd.ExecuteNonQuery();
+                    try
+                    {
+                        int rows = cmd.ExecuteNonQuery();
 
-                    ok = rows == 1;
+                        ok = rows == 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        ok = false;
+                    }
                 }
             }
 
             return ok;
+        }
+
+        private const string UPDATE_SQL = "update Kage set Name = @Name, Price = @Price, NoOfPieces = @Pieces where Name = @OriginalName";
+
+        public bool Update(string name, Kage kage)
+        {
+            bool ok = false;
+
+            // forbindelse til database
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                // sql kald
+                using (SqlCommand cmd = new SqlCommand(UPDATE_SQL, conn))
+                {
+                    cmd.Parameters.AddWithValue("@OriginalName", name);
+                    cmd.Parameters.AddWithValue("@Name", kage.Name);
+                    cmd.Parameters.AddWithValue("@Price", kage.Price);
+                    cmd.Parameters.AddWithValue("@Pieces", kage.NoOfPieces);
+
+                    try
+                    {
+                        int rows = cmd.ExecuteNonQuery();
+
+                        ok = rows == 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        ok = false;
+                    }
+                }
+            }
+
+            return ok;
+        }
+
+        private const string DELETE_SQL = "Delete from Kage where Name = @Name";
+
+        public Kage Delete(string name)
+        {
+            Kage kage = HentEn(name);
+
+            // forbindelse til database
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                // sql kald
+                using (SqlCommand cmd = new SqlCommand(DELETE_SQL, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            return kage;
         }
 
 
