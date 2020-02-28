@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BagerLib", "BagerLib\BagerLib.csproj", "{BEA12515-E394-4147-A1D2-33FBD9B026F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BagerLib", "BagerLib\BagerLib.csproj", "{BEA12515-E394-4147-A1D2-33FBD9B026F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BagerREST", "BagerREST\BagerREST.csproj", "{78DFB78D-DCCB-4E7B-BBEA-3DC6368A3445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KageApp", "KageApp\KageApp.csproj", "{72E5B556-2FD6-4E56-BEBA-B631FDE31C0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{78DFB78D-DCCB-4E7B-BBEA-3DC6368A3445}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78DFB78D-DCCB-4E7B-BBEA-3DC6368A3445}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78DFB78D-DCCB-4E7B-BBEA-3DC6368A3445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E5B556-2FD6-4E56-BEBA-B631FDE31C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E5B556-2FD6-4E56-BEBA-B631FDE31C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E5B556-2FD6-4E56-BEBA-B631FDE31C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E5B556-2FD6-4E56-BEBA-B631FDE31C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
