@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BagerLib.DBUitl;
 
 namespace BagerLib.model
 {
-    public class Kage
+    public class Kage : IDBElement
     {
         private string _name;
         private double _price;
@@ -44,5 +45,7 @@ namespace BagerLib.model
         {
             return $"{nameof(Name)}: {Name}, {nameof(Price)}: {Price}, {nameof(NoOfPieces)}: {NoOfPieces}";
         }
+
+        public int Id { get; set; }
     }
 }
